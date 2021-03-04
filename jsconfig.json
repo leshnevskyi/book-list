@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "vscode-styled-components"
+      }
+    ]
+  }
+}

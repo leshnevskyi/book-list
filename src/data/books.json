@@ -1,0 +1,58 @@
+[
+	{
+		"title": "Eloquent JavaScript, Second Edition",
+		"author": "Marijn Haverbeke",
+		"year": 2014,
+		"pageCount": 472,
+		"price": 23.99
+	},
+	{
+		"title": "Learning JavaScript Design Patterns",
+		"author": "Addy Osmani",
+		"year": 2012,
+		"pageCount": 254,
+		"price": 25.99
+	},
+	{
+		"title": "Speaking JavaScript",
+		"author": "Axel Rauschmayer",
+		"year": 2014,
+		"pageCount": 460,
+		"price": 24.99
+	},
+	{
+		"title": "Programming JavaScript Applications",
+		"author": "Eric Elliott",
+		"year": 2014,
+		"pageCount": 254,
+		"price": 39.99
+	},
+	{
+		"title": "Understanding ECMAScript 6",
+		"author": "Nicholas C. Zakas",
+		"year": 2016,
+		"pageCount": 352,
+		"price": 20.99
+	},
+	{
+		"title": "You Don't Know JS",
+		"author": "Kyle Simpson",
+		"year": 2015,
+		"pageCount": 278,
+		"price": 24.99
+	},
+	{
+		"title": "Git Pocket Guide",
+		"author": "Richard E. Silverman",
+		"year": 2013,
+		"pageCount": 234,
+		"price": 13.49
+	},
+	{	
+		"title": "Designing Evolvable Web APIs with ASP.NET",
+		"author": "Glenn Block",
+		"year": 2014,
+		"pageCount": 238,
+		"price": 34.15
+	}
+]

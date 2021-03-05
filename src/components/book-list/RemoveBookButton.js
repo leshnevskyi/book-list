@@ -8,6 +8,10 @@ const Button = styled.button`
 	height: var(--button-size);
 	width: var(--button-size);
 
+	&:hover {
+		--icon-color: rgb(var(--bright-red-500));
+	}
+
 	& svg {
 		height: 100%;
 		width: 100%;

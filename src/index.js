@@ -4,9 +4,11 @@ import {RecoilRoot} from 'recoil';
 
 import App from './components/App';
 import GlobalStyle from './components/styles/GlobalStyle';
+import GlobalFonts from './components/styles/GlobalFonts'
 
 ReactDOM.render(
 	<React.StrictMode>
+		<GlobalFonts/>
 		<GlobalStyle/>
 		<RecoilRoot>
 			<App/>

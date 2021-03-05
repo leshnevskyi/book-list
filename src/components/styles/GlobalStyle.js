@@ -120,57 +120,7 @@ const GlobalStyle = createGlobalStyle`
 		font-style: italic;
 		font-display: swap;
 	}
-
-	@font-face {
-		font-family: 'Bebas Neue';
-		src: local('Bebas Neue Thin'), local('BebasNeue-Thin'),
-		url('../../assets/fonts/subset-BebasNeue-Thin.woff2') format('woff2'),
-		url('../../assets/fonts/subset-BebasNeue-Thin.woff') format('woff');
-		font-weight: 100;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Bebas Neue';
-		src: local('Bebas Neue Light'), local('BebasNeue-Light'),
-		url('../../assets/fonts/subset-BebasNeue-Light.woff2') format('woff2'),
-		url('../../assets/fonts/subset-BebasNeue-Light.woff') format('woff');
-		font-weight: 300;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Bebas Neue Book';
-		src: local('Bebas Neue Book'), local('BebasNeueBook'),
-			url('../../assets/fonts/subset-BebasNeue-Book.woff2') format('woff2'),
-			url('../../assets/fonts/subset-BebasNeue-Book.woff') format('woff');
-		font-weight: 350;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Bebas Neue';
-		src: local('Bebas Neue Regular'), local('BebasNeueRegular'),
-			url('../../assets/fonts/subset-BebasNeue-Regular.woff2') format('woff2'),
-			url('../../assets/fonts/subset-BebasNeue-Regular.woff') format('woff');
-		font-weight: 400;
-		font-style: normal;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: 'Bebas Neue';
-		src: local('Bebas Neue Bold'), local('BebasNeueBold'),
-		url('../../assets/fonts/subset-BebasNeue-Bold.woff2') format('woff2'),
-		url('../../assets/fonts/subset-BebasNeue-Bold.woff') format('woff');
-		font-weight: 700;
-		font-style: normal;
-		font-display: swap;
-	}
-
+	
 	:root {
 		--white: 255, 255, 255;
 		--bright-red-500: 255, 73, 73;

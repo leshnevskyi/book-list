@@ -18,6 +18,11 @@ const GlobalStyle = createGlobalStyle`
 		overflow: hidden;
 	}
 
+	::selection {
+		color: rgb(var(--white));
+		background-color: rgb(var(--cold-grey-800));
+	}
+
 	* {
 		color: inherit;
 		font-size: inherit;
@@ -128,6 +133,7 @@ const GlobalStyle = createGlobalStyle`
 		background: var(--bg);
 		padding: 0;
 		cursor: pointer;
+		user-select: none;
 	}
 
 	button:disabled {

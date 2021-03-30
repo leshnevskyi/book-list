@@ -1,9 +1,9 @@
 import {useState, useEffect, useMemo} from 'react';
-import {useRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
 
 import DoublyLinkedList from '../../utils/doublyLinkedList';
-import {bookListState} from '../../state/atoms';
+import {bookListState, sortedBookListState} from '../../state/bookList';
 
 import ArrowButton from '../shared/ArrowButton';
 import RemoveBookButton from './RemoveBookButton';
@@ -37,6 +37,9 @@ const InfoTable = styled.table`
 	margin: 6rem 0;
 `;
 
+const TableBody = styled.tbody`
+`;
+
 const AttrWrapper = styled.tr`
 	font-size: 1.5em;
 `;
@@ -66,16 +69,23 @@ const attrTitles = {
 }
 
 const BookList = () => {
-	const [books, setBooks] = useRecoilState(bookListState);
-	const bookList = useMemo(() => new DoublyLinkedList(...books), [books]);
+	const setBooks = useSetRecoilState(bookListState);
+	const sortedBooks = useRecoilValue(sortedBookListState);
+
+	const bookList = useMemo(() => {
+		return new DoublyLinkedList(...sortedBooks) 
+	}, [sortedBooks]);
+
 	const [currBook, setCurrBook] = useState(bookList.head);
 
 	const deleteBook = () => {
-		const filteredBooks = books.filter(book => {
-			return book.title !== currBook.data.title;
-		});
+		setBooks(books => {
+			const filteredBooks = books.filter(book => {
+				return book.title !== currBook.data.title;
+			});
 
-		setBooks(filteredBooks);
+			return filteredBooks;
+		});
 	}
 
 	let renderedAttrs;
@@ -116,12 +126,14 @@ const BookList = () => {
 					/>
 				</Controls>
 				<Heading>{currBook.data.title}</Heading>
-				<AttrWrapper>
-					<AttrTitle>by&nbsp;</AttrTitle>
+				<AttrWrapper as='div'>
+					<AttrTitle as='span'>by&nbsp;</AttrTitle>
 					<Author>{currBook.data.author}</Author>
 				</AttrWrapper>
 				<InfoTable>
-					{renderedAttrs}
+					<TableBody>
+						{renderedAttrs}
+					</TableBody>
 				</InfoTable>
 			</>
 			}

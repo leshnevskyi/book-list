@@ -2,7 +2,7 @@ import {useSetRecoilState} from 'recoil';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 
-import {bookListState} from '../../state/atoms';
+import {bookListState} from '../../state/bookList';
 
 import InputField from './InputField';
 
@@ -72,7 +72,6 @@ const BookForm = () => {
 	const {register, handleSubmit, formState, reset, errors} = useForm({
 		mode: 'onChange',
 	});
-	console.log(errors);
 
 	const renderedInputs = inputs.map(({label, name, pattern, max}) => (
 		<InputField 
@@ -91,7 +90,7 @@ const BookForm = () => {
 	return (
 		<Form
 			onSubmit={handleSubmit(data => {
-				setBookList(state => [...state, data]);
+				setBookList(state => [data, ...state,]);
 				reset();
 			})}
 		>	

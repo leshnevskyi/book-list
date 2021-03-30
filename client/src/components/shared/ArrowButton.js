@@ -4,6 +4,7 @@ import {ReactComponent as ArrowIcon} from '../../assets/icons/arrow.svg';
 
 const Button = styled.button`
 	--bg: transparent;
+	--icon-color: rgb(var(--cold-grey-100));
 
 	height: var(--button-size);
 	width: var(--button-size);
@@ -21,6 +22,10 @@ const Button = styled.button`
 				return 0;
 		}
 	}}deg);
+
+	&:not(:disabled):hover {
+		--icon-color: rgb(var(--white));
+	}
 
 	& svg {
 		height: 100%;

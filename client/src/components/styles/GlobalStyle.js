@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	::selection {
-		color: rgb(var(--white));
-		background-color: rgb(var(--cold-grey-800));
+		color: rgb(var(--cold-grey-800));
+		background-color: rgb(var(--cold-grey-100));
 	}
 
 	* {

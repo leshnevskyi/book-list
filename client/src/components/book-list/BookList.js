@@ -7,6 +7,7 @@ import {bookListState, sortedBookListState} from '../../state/bookList';
 
 import ArrowButton from '../shared/ArrowButton';
 import RemoveBookButton from './RemoveBookButton';
+import BookSortingSelect from './BookSortingSelect';
 
 const Section = styled.section`
 	min-height: 100vh;
@@ -124,6 +125,7 @@ const BookList = () => {
 					<RemoveBookButton
 						onClick={deleteBook}
 					/>
+					<BookSortingSelect></BookSortingSelect>
 				</Controls>
 				<Heading>{currBook.data.title}</Heading>
 				<AttrWrapper as='div'>

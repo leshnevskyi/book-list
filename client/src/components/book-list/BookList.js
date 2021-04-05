@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import DoublyLinkedList from '../../utils/doublyLinkedList';
 import {bookListState, sortedBookListState} from '../../state/bookList';
 
-import ArrowButton from '../shared/ArrowButton';
+import Arrow from '../shared/Arrow';
 import RemoveBookButton from './RemoveBookButton';
 import BookSortingSelect from './BookSortingSelect';
 
@@ -19,6 +19,10 @@ const Controls = styled.div`
 	display: flex;
 	margin: 5rem -1rem;
 	gap: 5rem;
+`;
+
+const ArrowButton = styled(Arrow).attrs({el: 'button'})`
+	--icon-size: var(--button-size);
 `;
 
 const Heading = styled.h1`
@@ -109,36 +113,32 @@ const BookList = () => {
 
 	return (
 		<Section>
-			{currBook && 
-			<>
-				<Controls>
-					<ArrowButton 
-						direction='left'
-						disabled={!currBook.prev}
-						onClick={() => setCurrBook(currBook.prev)}
-					/>
-					<ArrowButton 
-						direction='right'
-						disabled={!currBook.next}
-						onClick={() => setCurrBook(currBook.next)}	
-					/>
-					<RemoveBookButton
-						onClick={deleteBook}
-					/>
-					<BookSortingSelect></BookSortingSelect>
-				</Controls>
-				<Heading>{currBook.data.title}</Heading>
-				<AttrWrapper as='div'>
-					<AttrTitle as='span'>by&nbsp;</AttrTitle>
-					<Author>{currBook.data.author}</Author>
-				</AttrWrapper>
-				<InfoTable>
-					<TableBody>
-						{renderedAttrs}
-					</TableBody>
-				</InfoTable>
-			</>
-			}
+			<Controls>
+				<ArrowButton 
+					direction='left'
+					disabled={!currBook.prev}
+					onClick={() => setCurrBook(currBook.prev)}
+				/>
+				<ArrowButton 
+					direction='right'
+					disabled={!currBook.next}
+					onClick={() => setCurrBook(currBook.next)}	
+				/>
+				<RemoveBookButton
+					onClick={deleteBook}
+				/>
+				<BookSortingSelect></BookSortingSelect>
+			</Controls>
+			<Heading>{currBook.data.title}</Heading>
+			<AttrWrapper as='div'>
+				<AttrTitle as='span'>by&nbsp;</AttrTitle>
+				<Author>{currBook.data.author}</Author>
+			</AttrWrapper>
+			<InfoTable>
+				<TableBody>
+					{renderedAttrs}
+				</TableBody>
+			</InfoTable>
 		</Section>
 	);
 }

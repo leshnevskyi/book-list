@@ -4,8 +4,11 @@ import styled from 'styled-components';
 
 import {bookSortingState} from '../../state/bookList';
 
-const Select = styled.button`
-	width: 15em;
+import Arrow from '../shared/Arrow';
+
+const Select = styled.div`
+	position: relative;
+	width: 14em;
 	display: flex;
 	justify-content: start;
 	align-items: center;
@@ -16,6 +19,14 @@ const Select = styled.button`
 const Option = styled.span`
 	color: rgb(var(--white));
 	font-weight: 700;
+`;
+
+const ArrowButton = styled(Arrow).attrs({el: 'button'})`
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 5em;
+	justify-content: flex-end;
 `;
 
 const options = [
@@ -38,18 +49,22 @@ export default () => {
 
 	useEffect(() => {
 		setSortingState(state => ({...state, by: option.value}));
-	}, [option]);
+	}, [option, setSortingState]);
 
 	function handleClick() {
 		setOptionIndex(prevIndex => ++prevIndex % optionCount);
 	}
 
 	return (
-		<Select onClick={handleClick}>
+		<Select>
 			sort by&nbsp;
 			<Option>
 				{option.description ?? option.value}
 			</Option>
+			<ArrowButton
+				direction='right'
+				onClick={handleClick}
+			/>
 		</Select>
 	);
 }

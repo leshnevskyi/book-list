@@ -1,7 +1,11 @@
 import styled, {keyframes} from 'styled-components';
+import {useRecoilValue} from 'recoil';
+
+import {bookListState} from '../state/bookList';
 
 import Form from './book-form/BookForm';
 import BookList from './book-list/BookList';
+import DefaultHeadingSection from './book-list/DefaultHeadingSection';
 
 const scrollingTitle = keyframes`
 	from {
@@ -53,10 +57,16 @@ const ContentWrapper = styled.div`
 `;
 
 const App = () => {
+	const bookList = useRecoilValue(bookListState);
+	const isBookListEmpty = Boolean(bookList.length);
+
 	return (
 		<ContentWrapper>
 			<Form/>
-			<BookList/>
+			{isBookListEmpty 
+				? <BookList/> 
+				: <DefaultHeadingSection/>
+			}
 		</ContentWrapper>
 	);
 }

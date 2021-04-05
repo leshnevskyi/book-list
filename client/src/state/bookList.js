@@ -1,11 +1,12 @@
 import {atom, selector} from 'recoil';
 
 import initialBookList from '../data/books.json';
-import {sortObjects} from '../utils/sort';
+import {sortObjects} from '../utils/sorting';
+import {getValidBooks} from '../utils/validation';
 
 const bookListState = atom({
 	key: 'bookListState',
-	default: initialBookList,
+	default: getValidBooks(initialBookList),
 });
 
 const bookSortingState = atom({

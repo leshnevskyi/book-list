@@ -42,7 +42,7 @@ const options = [
 
 const optionCount = options.length;
 
-export default () => {
+const BookSortingSelect = () => {
 	const [optionIndex, setOptionIndex] = useState(0);
 	const option = options[optionIndex];
 	const setSortingState = useSetRecoilState(bookSortingState);
@@ -68,3 +68,5 @@ export default () => {
 		</Select>
 	);
 }
+
+export default BookSortingSelect;

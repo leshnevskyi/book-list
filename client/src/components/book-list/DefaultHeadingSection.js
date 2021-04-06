@@ -10,7 +10,7 @@ const Heading = styled.h1`
 	font-weight: 900;
 `;
 
-export default () => {
+const DefaultHeadingSection = () => {
 	return (
 		<Wrapper>
 			<Heading>
@@ -21,3 +21,5 @@ export default () => {
 		</Wrapper>
 	);
 }
+
+export default DefaultHeadingSection;

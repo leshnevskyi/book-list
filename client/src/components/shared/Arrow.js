@@ -36,10 +36,12 @@ const Wrapper = styled.div`
 	}
 `;
 
-export default ({el, ...restProps}) => {
+const Arrow = ({el, ...restProps}) => {
 	return (
 		<Wrapper as={el} {...restProps}>
 			<ArrowIcon/>
 		</Wrapper>
 	);
 }
+
+export default Arrow;

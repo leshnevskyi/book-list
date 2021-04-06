@@ -1,37 +1,12 @@
 import {useSetRecoilState} from 'recoil';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
+import {upperFirst} from 'lodash-es';
 
 import {bookListState} from '../../state/bookList';
+import {bookProps} from '../../utils/validation'
 
 import InputField from './InputField';
-
-const inputs = [
-	{
-		label: 'Title',
-		name: 'title',
-	},
-	{
-		label: 'Author',
-		name: 'author',
-	},
-	{
-		label: 'Year',
-		name: 'year',
-		pattern: /^\d{4}$/,
-		max: new Date().getFullYear(),
-	},
-	{
-		label: 'Number of pages',
-		name: 'pageCount',
-		pattern: /^\d+$/,
-	},
-	{
-		label: 'Price',
-		name: 'price',
-		pattern: /^\d+(\.\d{2})?$/,
-	},
-];
 
 const Form = styled.form`
 	--input-height: 6.25rem;
@@ -73,9 +48,9 @@ const BookForm = () => {
 		mode: 'onChange',
 	});
 
-	const renderedInputs = inputs.map(({label, name, pattern, max}) => (
+	const renderedInputs = bookProps.map(({label, name, pattern, max}) => (
 		<InputField 
-			label={label}
+			label={upperFirst(label ?? name)}
 			name={name}
 			isValid={!errors[name]}
 			key={label}

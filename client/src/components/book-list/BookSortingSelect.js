@@ -3,8 +3,10 @@ import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
 
 import {bookSortingState} from '../../state/bookList';
+import {bookProps} from '../../utils/validation';
 
 import Arrow from '../shared/Arrow';
+import { fromPairs } from 'lodash';
 
 const Select = styled.div`
 	position: relative;
@@ -29,16 +31,10 @@ const ArrowButton = styled(Arrow).attrs({el: 'button'})`
 	justify-content: flex-end;
 `;
 
-const options = [
-	{value: 'title'},
-	{value: 'author'},
-	{value: 'year'},
-	{
-		description: 'number of pages',
-		value: 'pageCount',
-	},
-	{value: 'price'},
-];
+const options = bookProps.map(prop => ({
+	value: prop.name,
+	description: prop.label ?? prop.name,
+}));
 
 const optionCount = options.length;
 
@@ -59,7 +55,7 @@ const BookSortingSelect = () => {
 		<Select>
 			sort by&nbsp;
 			<Option>
-				{option.description ?? option.value}
+				{option.description}
 			</Option>
 			<ArrowButton
 				direction='right'

@@ -8,6 +8,7 @@ const bookProps = [
 	},
 	{
 		name: 'pageCount',
+		label: 'number of pages',
 		pattern: /^\d+$/,
 	},
 	{

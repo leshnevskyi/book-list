@@ -2,6 +2,9 @@ import {createGlobalStyle} from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 	:root {
+		--v-padding: 7.3vh;
+		--h-padding: 7.9vw;
+
 		--white: 255, 255, 255;
 		--bright-red-500: 255, 73, 73;
 		--cold-grey-100: 195, 199, 215;
@@ -12,6 +15,8 @@ const GlobalStyle = createGlobalStyle`
 		--default-stroke-width: 2px;
 
 		--icon-color: rgb(var(--cold-grey-100));
+
+		--default-input-height: 4.3rem;
 
 		font-size: 10px;
 		line-height: 1.3;

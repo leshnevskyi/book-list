@@ -2,10 +2,13 @@ import styled, {keyframes} from 'styled-components';
 import {useRecoilValue} from 'recoil';
 
 import {bookListState} from '../state/bookList';
+import {navigationState} from '../state/navigation';
 
 import Form from './book-form/BookForm';
 import BookList from './book-list/BookList';
 import DefaultHeadingSection from './book-list/DefaultHeadingSection';
+import ToggleNavButton from './navigation/ToggleNavButton';
+import Navigation from './navigation/Navigation';
 
 const scrollingTitle = keyframes`
 	from {
@@ -20,13 +23,13 @@ const scrollingTitle = keyframes`
 `;
 
 const ContentWrapper = styled.div`
-	--vertical-padding: 7.9vw;
 	--content: 'Book List';
 
+	position: relative;
 	display: grid;
 	grid-template-columns: 2.6fr 5fr;
 	gap: 7.5vmax;
-	padding: 7.3vh var(--vertical-padding);
+	padding: var(--v-padding) var(--h-padding);
 	
 	&:before, &:after {
 		--default-transformation: translateY(-100%) rotate(-90deg);
@@ -34,7 +37,7 @@ const ContentWrapper = styled.div`
 		content: var(--content);
 		position: fixed;
 		top: 0;
-		right: var(--vertical-padding);
+		right: var(--h-padding);
 		width: 150vh;
 		display: flex;
 		color: rgb(var(--cold-grey-800));
@@ -58,16 +61,21 @@ const ContentWrapper = styled.div`
 
 const App = () => {
 	const bookList = useRecoilValue(bookListState);
+	const {isOpen: isNavOpen} = useRecoilValue(navigationState);
 	const isBookListEmpty = Boolean(bookList.length);
 
 	return (
-		<ContentWrapper>
-			<Form/>
-			{isBookListEmpty 
-				? <BookList/> 
-				: <DefaultHeadingSection/>
-			}
-		</ContentWrapper>
+		<>
+			<ContentWrapper>
+				<Form/>
+				{isBookListEmpty 
+					? <BookList/> 
+					: <DefaultHeadingSection/>
+				}
+			</ContentWrapper>
+			{isNavOpen && <Navigation/>}
+			<ToggleNavButton/>
+		</>
 	);
 }
 

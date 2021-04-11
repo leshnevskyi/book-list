@@ -12,9 +12,14 @@ const bookListState = atom({
 const bookSortingState = atom({
 	key: 'bookSortingState',
 	default: {
-		by: 'author',
+		by: 'title',
 		order: 'asc',
 	},
+});
+
+const bookCountState = atom({
+	key: 'bookCountState',
+	default: 5,
 });
 
 const sortedBookListState = selector({
@@ -33,4 +38,5 @@ export {
 	bookListState,
 	bookSortingState,
 	sortedBookListState,
-}
+	bookCountState,
+};

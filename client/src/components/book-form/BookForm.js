@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {upperFirst} from 'lodash-es';
 
 import {bookListState} from '../../state/bookList';
-import {bookProps} from '../../utils/validation'
+import {bookProps, normalizeBookData} from '../../utils/validation'
 
 import InputField from './InputField';
 
@@ -48,12 +48,17 @@ const BookForm = () => {
 		mode: 'onChange',
 	});
 
-	const renderedInputs = bookProps.map(({label, name, pattern, max}) => (
+	const renderedInputs = Object.values(bookProps).map(({
+		label, 
+		name, 
+		pattern, 
+		max,
+	}) => (
 		<InputField 
 			label={upperFirst(label ?? name)}
 			name={name}
 			isValid={!errors[name]}
-			key={label}
+			key={name}
 			ref={register({
 				required: true,
 				pattern,
@@ -62,12 +67,15 @@ const BookForm = () => {
 		/>
 	));
 
+	const handleSubmitCallback = data => {
+		setBookList(state => [normalizeBookData(data), ...state]);
+		reset();
+	}
+
 	return (
 		<Form
-			onSubmit={handleSubmit(data => {
-				setBookList(state => [data, ...state,]);
-				reset();
-			})}
+			onSubmit={handleSubmit(handleSubmitCallback)}
+			noValidate
 		>	
 			<InputsWrapper>
 				{renderedInputs}

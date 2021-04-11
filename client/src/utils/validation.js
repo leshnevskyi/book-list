@@ -1,24 +1,34 @@
-const bookProps = [
-	{name: 'title'},
-	{name: 'author'},
-	{
+const bookProps = {
+	title: {
+		type: 'string',
+		name: 'title',
+	},
+	author: {
+		type: 'string',
+		name: 'author'
+	},
+	year: {
+		type: 'number',
 		name: 'year',
-		pattern: /^\d{4}$/,
+		pattern: /^[1-9]\d*$/,
 		max: new Date().getFullYear(),
 	},
-	{
+	pageCount: {
+		type: 'number',
 		name: 'pageCount',
+		shortLabel: 'pages',
 		label: 'number of pages',
-		pattern: /^\d+$/,
+		pattern: /^[1-9]\d*$/,
 	},
-	{
+	price: {
+		type: 'number',
 		name: 'price',
 		pattern: /^\d+(\.\d{2})?$/,
 	},
-];
+};
 
 function isBookValid(book) {
-	for (const prop of bookProps) {
+	for (const prop of Object.values(bookProps)) {
 		if (!book.hasOwnProperty(prop.name)) return false;
 
 		if (prop.hasOwnProperty('pattern')) {
@@ -39,8 +49,24 @@ function getValidBooks(books) {
 	return books.filter(book => isBookValid(book));
 }
 
+function normalizeBookData(data) {
+	const normalizedData = {};
+
+	for (const propKey in bookProps) {
+		const prop = bookProps[propKey];
+		let value = data[propKey];
+
+		if (prop.type === 'number') value = Number(value);
+
+		normalizedData[propKey] = value;
+	}
+
+	return normalizedData;
+}
+
 export {
 	bookProps,
 	isBookValid,
 	getValidBooks,
+	normalizeBookData,
 };

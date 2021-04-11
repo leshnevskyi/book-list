@@ -7,16 +7,17 @@ import {bookListState, sortedBookListState} from '../../state/bookList';
 
 import Arrow from '../shared/Arrow';
 import RemoveBookButton from './RemoveBookButton';
-import BookSortingSelect from './BookSortingSelect';
+import BookSortingSelect from '../shared/BookSortingSelect';
 
 const Section = styled.section`
 	min-height: 100vh;
 `;
 
 const Controls = styled.div`
-	--button-size: 4.3rem;
+	--button-size: var(--default-input-height);
 
 	display: flex;
+	align-items: center;
 	margin: 5rem -1rem;
 	gap: 5rem;
 `;
@@ -39,7 +40,7 @@ const Author = styled.strong`
 `;
 
 const InfoTable = styled.table`
-	margin: 6rem 0;
+	margin: 5rem 0;
 `;
 
 const TableBody = styled.tbody`

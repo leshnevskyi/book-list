@@ -31,7 +31,9 @@ const InputField = forwardRef(({label, name, ...restProps}, ref) => {
 			<Input 
 				ref={ref}
 				name={name}
+				type='text'
 				autoComplete='off'
+				spellcheck={false}
 				{...restProps}
 			/>
 		</Label>

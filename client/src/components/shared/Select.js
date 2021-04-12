@@ -54,7 +54,7 @@ const Select = ({label, options, defaultOption, onChange}) => {
 
 	useEffect(() => {
 		onChange(selectedOption.data);
-	}, [selectedOption]);
+	}, [selectedOption, onChange]);
 
 	function selectPrevOption() {
 		setSelectedOption(prevOption => prevOption.prev);

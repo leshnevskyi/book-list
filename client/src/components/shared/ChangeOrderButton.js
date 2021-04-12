@@ -24,9 +24,9 @@ const ChangeOrderButton = () => {
 	function handleClick() {
 		setSorting(prevState => ({
 			...prevState,
-			order: prevState.order == 'asc' 
+			order: prevState.order === 'asc' 
 				? 'desc' 
-				: prevState.order == 'desc'
+				: prevState.order === 'desc'
 				? 'asc'
 				: null,
 		}));

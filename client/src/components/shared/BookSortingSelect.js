@@ -1,3 +1,4 @@
+import {useCallback} from 'react';
 import {useSetRecoilState} from 'recoil';
 
 import {bookSortingState} from '../../state/bookList';
@@ -12,19 +13,21 @@ const options = Object.values(bookProps).map(prop => ({
 
 const BookSortingSelect = () => {
 	const label = 'sort by';
-	const defaultOption = options.find(option => option.name == 'title');
+	const defaultOption = options.find(option => option.name === 'title');
 	const setSortingState = useSetRecoilState(bookSortingState);
 
 	function changeSorting(selectedOption) {
 		setSortingState(state => ({...state, by: selectedOption.name}));
 	}
 
+	const handleChange = useCallback(changeSorting, [setSortingState]);
+
 	return (
 		<Select
 			defaultOption={defaultOption}
 			options={options}
 			label={label}
-			onChange={changeSorting}
+			onChange={handleChange}
 		/>
 	);
 }

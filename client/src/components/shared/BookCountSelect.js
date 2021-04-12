@@ -22,7 +22,7 @@ const BookCountSelect = () => {
 	}), {value: Infinity, label: 'all'}];
 
 	const defaultOption = options.find(option => {
-		return option.value == Infinity;
+		return option.value === Infinity;
 	});
 	
 	function changeBookCount(selectedOption) {

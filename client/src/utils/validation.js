@@ -45,8 +45,16 @@ function isBookValid(book) {
 	return true;
 }
 
+function validateBook(book) {
+	if (isBookValid(book)) return true;
+
+	console.error(`Book data is not valid`, book);
+
+	return false;
+}
+
 function getValidBooks(books) {
-	return books.filter(book => isBookValid(book));
+	return books.filter(book => validateBook(book));
 }
 
 function normalizeBookData(data) {

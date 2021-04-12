@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import Select from './Select';
-
 const ToolbarWrapper = styled.div`
 	--button-size: var(--default-input-height);
 

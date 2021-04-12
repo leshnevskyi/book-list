@@ -1,7 +1,7 @@
-import {useSetRecoilState} from 'recoil';
+import {useRecoilState} from 'recoil';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
-import {upperFirst} from 'lodash-es';
+import {isEqual, upperFirst} from 'lodash-es';
 
 import {bookListState} from '../../state/bookList';
 import {bookProps, normalizeBookData} from '../../utils/validation'
@@ -43,7 +43,7 @@ const Button = styled.button`
 `;
 
 const BookForm = () => {
-	const setBookList = useSetRecoilState(bookListState);
+	const [bookList, setBookList] = useRecoilState(bookListState);
 	const {register, handleSubmit, formState, reset, errors} = useForm({
 		mode: 'onChange',
 	});
@@ -68,7 +68,19 @@ const BookForm = () => {
 	));
 
 	const handleSubmitCallback = data => {
-		setBookList(state => [normalizeBookData(data), ...state]);
+		const newBook = normalizeBookData(data);
+		
+		const isBookPresent = Boolean(bookList.find(currBook => {
+			return isEqual(newBook, currBook);
+		}));
+
+		if (isBookPresent) {
+			console.error('Book is already in the list');
+
+			return;
+		}
+
+		setBookList(state => [...state, newBook]);
 		reset();
 	}
 

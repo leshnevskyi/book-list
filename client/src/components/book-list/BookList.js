@@ -5,21 +5,13 @@ import styled from 'styled-components';
 import DoublyLinkedList from '../../utils/doublyLinkedList';
 import {bookListState, sortedBookListState} from '../../state/bookList';
 
+import Toolbar from '../shared/Toolbar';
 import Arrow from '../shared/Arrow';
 import RemoveBookButton from './RemoveBookButton';
 import BookSortingSelect from '../shared/BookSortingSelect';
 
 const Section = styled.section`
 	min-height: 100vh;
-`;
-
-const Controls = styled.div`
-	--button-size: var(--default-input-height);
-
-	display: flex;
-	align-items: center;
-	margin: 5rem -1rem;
-	gap: 5rem;
 `;
 
 const ArrowButton = styled(Arrow).attrs({el: 'button'})`
@@ -114,7 +106,11 @@ const BookList = () => {
 
 	return (
 		<Section>
-			<Controls>
+			<Toolbar 
+				style={{
+					margin: '5rem -1rem',
+				}}
+			>
 				<ArrowButton 
 					direction='left'
 					disabled={!currBook.prev}
@@ -129,7 +125,7 @@ const BookList = () => {
 					onClick={deleteBook}
 				/>
 				<BookSortingSelect></BookSortingSelect>
-			</Controls>
+			</Toolbar>
 			<Heading>{currBook.data.title}</Heading>
 			<AttrWrapper as='div'>
 				<AttrTitle as='span'>by&nbsp;</AttrTitle>

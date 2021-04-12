@@ -4,6 +4,7 @@ import Toolbar from '../shared/Toolbar';
 import BookCountSelect from '../shared/BookCountSelect';
 import BookSortingSelect from '../shared/BookSortingSelect';
 import BookTable from '../book-list/BookTable';
+import ChangeOrderButton from '../shared/ChangeOrderButton';
 
 const ContentWrapper = styled.div`
 	position: absolute;
@@ -22,6 +23,7 @@ const Navigation = () => {
 			<Toolbar>
 				<BookCountSelect/>
 				<BookSortingSelect/>
+				<ChangeOrderButton/>
 			</Toolbar>
 			<BookTable/>
 		</ContentWrapper>

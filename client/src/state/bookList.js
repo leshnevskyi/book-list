@@ -19,7 +19,7 @@ const bookSortingState = atom({
 
 const bookCountState = atom({
 	key: 'bookCountState',
-	default: 5,
+	default: Infinity,
 });
 
 const sortedBookListState = selector({

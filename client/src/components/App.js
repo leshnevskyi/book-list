@@ -62,15 +62,15 @@ const ContentWrapper = styled.div`
 const App = () => {
 	const bookList = useRecoilValue(bookListState);
 	const {isOpen: isNavOpen} = useRecoilValue(navigationState);
-	const isBookListEmpty = Boolean(bookList.length);
+	const isBookListEmpty = !bookList.length;
 
 	return (
 		<>
 			<ContentWrapper>
 				<Form/>
 				{isBookListEmpty 
-					? <BookList/> 
-					: <DefaultHeadingSection/>
+					? <DefaultHeadingSection/>
+					: <BookList/> 
 				}
 			</ContentWrapper>
 			{isNavOpen && <Navigation/>}

@@ -1,10 +1,14 @@
+import {useRecoilValue} from 'recoil';
 import styled from 'styled-components';
+
+import {bookListState} from '../../state/bookList';
 
 import Toolbar from '../shared/Toolbar';
 import BookCountSelect from '../shared/BookCountSelect';
 import BookSortingSelect from '../shared/BookSortingSelect';
 import BookTable from '../book-list/BookTable';
 import ChangeOrderButton from '../shared/ChangeOrderButton';
+import DefaultHeadingSection from '../book-list/DefaultHeadingSection';
 
 const ContentWrapper = styled.div`
 	position: absolute;
@@ -18,6 +22,9 @@ const ContentWrapper = styled.div`
 `;
 
 const Navigation = () => {
+	const bookList = useRecoilValue(bookListState);
+	const isBookListEmpty = !bookList.length;
+
 	return (
 		<ContentWrapper>
 			<Toolbar>
@@ -25,7 +32,10 @@ const Navigation = () => {
 				<BookSortingSelect/>
 				<ChangeOrderButton/>
 			</Toolbar>
-			<BookTable/>
+			{isBookListEmpty
+				? <DefaultHeadingSection/>
+				: <BookTable/>
+			}
 		</ContentWrapper>
 	);
 }

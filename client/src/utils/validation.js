@@ -38,7 +38,7 @@ function isBookValid(book) {
 		}
 
 		if (prop.hasOwnProperty('max')) {
-			if (book[prop.name] >= prop.max) return false;
+			if (book[prop.name] > prop.max) return false;
 		}
 	}
 

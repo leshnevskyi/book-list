@@ -4,6 +4,7 @@ import {useRecoilValue} from 'recoil';
 import {bookListState} from '../state/bookList';
 import {navigationState} from '../state/navigation';
 
+import NotificationProvider from './notifications/NotificationProvider';
 import Form from './book-form/BookForm';
 import BookList from './book-list/BookList';
 import DefaultHeadingSection from './book-list/DefaultHeadingSection';
@@ -65,7 +66,7 @@ const App = () => {
 	const isBookListEmpty = !bookList.length;
 
 	return (
-		<>
+		<NotificationProvider>
 			<ContentWrapper>
 				<Form/>
 				{isBookListEmpty 
@@ -75,7 +76,7 @@ const App = () => {
 			</ContentWrapper>
 			{isNavOpen && <Navigation/>}
 			<ToggleNavButton/>
-		</>
+		</NotificationProvider>
 	);
 }
 

@@ -5,6 +5,7 @@ import {isEqual, upperFirst} from 'lodash-es';
 
 import {bookListState} from '../../state/bookList';
 import {bookProps, normalizeBookData} from '../../utils/validation'
+import {useNotifications} from '../notifications/hooks/useNotifications';
 
 import InputField from './InputField';
 
@@ -44,6 +45,7 @@ const Button = styled.button`
 
 const BookForm = () => {
 	const [bookList, setBookList] = useRecoilState(bookListState);
+	const {notify} = useNotifications();
 	const {register, handleSubmit, formState, reset, errors} = useForm({
 		mode: 'onChange',
 	});
@@ -75,7 +77,7 @@ const BookForm = () => {
 		}));
 
 		if (isBookPresent) {
-			console.error('Book is already in the list');
+			notify.error('Book is already in the list');
 
 			return;
 		}

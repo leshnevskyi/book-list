@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import DoublyLinkedList from '../../utils/doublyLinkedList';
 import {bookListState, sortedBookListState} from '../../state/bookList';
+import { useNotifications } from '../notifications/hooks/useNotifications';
 
 import Toolbar from '../shared/Toolbar';
 import Arrow from '../shared/Arrow';
@@ -75,6 +76,7 @@ const BookList = () => {
 	}, [sortedBooks]);
 
 	const [currBook, setCurrBook] = useState(bookList.head);
+	const {notify} = useNotifications();
 
 	const deleteBook = () => {
 		setBooks(books => {
@@ -84,6 +86,8 @@ const BookList = () => {
 
 			return filteredBooks;
 		});
+
+		notify.info('Book removed');
 	}
 
 	let renderedAttrs;

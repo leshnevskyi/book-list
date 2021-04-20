@@ -7,21 +7,30 @@ import {bookCountState} from '../../state/bookList';
 import {bookProps} from '../../utils/validation';
 
 const Table = styled.table`
+	--row-height: 4.3em; 
+
 	position: relative;
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 `;
 
 const TableHead = styled.thead`
-
+	width: 100%;
 `;
 
 const TableBody = styled.tbody`
-
+	position: relative;
+	max-height: calc(var(--row-height) * 6);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
 `;
 
 const TableRow = styled.tr`
 	position: relative;
-	height: 4.3em;
+	height: var(--row-height);
 	display: grid;
 	grid-template-columns: 7fr 5fr 2fr 2fr 2fr;
 	gap: 0 3rem;

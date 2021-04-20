@@ -9,7 +9,7 @@ const NotificationContainer = styled.div`
 	bottom: var(--v-padding);
 	right: var(--h-padding);
 	display: flex;
-	flex-direction: column;
+	flex-direction: column-reverse;
 	gap: 2.5rem;
 `;
 

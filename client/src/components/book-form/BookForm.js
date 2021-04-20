@@ -83,6 +83,7 @@ const BookForm = () => {
 		}
 
 		setBookList(state => [...state, newBook]);
+		notify.info('Book added');
 		reset();
 	}
 

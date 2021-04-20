@@ -28,6 +28,22 @@ const GlobalStyle = createGlobalStyle`
 		background-color: rgb(var(--cold-grey-100));
 	}
 
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: rgb(var(--cold-grey-500));
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgb(var(--cold-grey-100));
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgb(var(--white));
+	}
+
 	* {
 		color: inherit;
 		font-size: inherit;

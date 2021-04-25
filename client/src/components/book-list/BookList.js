@@ -1,10 +1,10 @@
 import {useState, useEffect, useMemo} from 'react';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 
+import {selectSortedBooks, removeBook} from './bookListSlice';
 import DoublyLinkedList from '../../utils/doublyLinkedList';
-import {bookListState, sortedBookListState} from '../../state/bookList';
-import { useNotifications } from '../notifications/hooks/useNotifications';
+import {useNotifications} from '../notifications/hooks/useNotifications';
 
 import Toolbar from '../shared/Toolbar';
 import Arrow from '../shared/Arrow';
@@ -68,8 +68,8 @@ const attrTitles = {
 }
 
 const BookList = () => {
-	const setBooks = useSetRecoilState(bookListState);
-	const sortedBooks = useRecoilValue(sortedBookListState);
+	const dispatch = useDispatch();
+	const sortedBooks = useSelector(selectSortedBooks);
 
 	const bookList = useMemo(() => {
 		return new DoublyLinkedList(...sortedBooks) 
@@ -78,22 +78,14 @@ const BookList = () => {
 	const [currBook, setCurrBook] = useState(bookList.head);
 	const {notify} = useNotifications();
 
-	const deleteBook = () => {
-		setBooks(books => {
-			const filteredBooks = books.filter(book => {
-				return book.title !== currBook.data.title;
-			});
-
-			return filteredBooks;
-		});
-
-		notify.info('Book removed');
-	}
-
 	let renderedAttrs;
 
 	if (currBook) renderedAttrs = Object.keys(currBook.data)
-		.filter(attrTitle => attrTitle !== 'title' && attrTitle !== 'author')
+		.filter(attrTitle => (
+			attrTitle !== 'id' 
+			&& attrTitle !== 'title' 
+			&& attrTitle !== 'author'
+		))
 		.map(attrTitle => (
 			<AttrWrapper key={attrTitle}>
 				<AttrTitle>{attrTitles[attrTitle]}&nbsp;</AttrTitle>
@@ -126,9 +118,12 @@ const BookList = () => {
 					onClick={() => setCurrBook(currBook.next)}	
 				/>
 				<RemoveBookButton
-					onClick={deleteBook}
+					onClick={() => {
+						dispatch(removeBook(currBook.data.id));
+						notify.info('Book removed');
+					}}
 				/>
-				<BookSortingSelect></BookSortingSelect>
+				<BookSortingSelect/>
 			</Toolbar>
 			<Heading>{currBook.data.title}</Heading>
 			<AttrWrapper as='div'>

@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+		"baseUrl": "src",
     "plugins": [
       {
         "name": "vscode-styled-components"
       }
     ]
-  }
+  },
+	"include": ["src"]
 }

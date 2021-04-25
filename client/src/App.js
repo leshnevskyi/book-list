@@ -1,14 +1,13 @@
 import styled, {keyframes} from 'styled-components';
-import {useSelector} from 'react-redux';
 import {useRecoilValue} from 'recoil';
 
-import {selectBookListIsEmpty} from './book-list/bookListSlice';
-import {navigationState} from '../state/navigation';
+import {bookListState} from './state/bookList';
+import {navigationState} from './state/navigation';
 
 import NotificationProvider from './notifications/NotificationProvider';
-import Form from './book-form/BookForm';
-import BookList from './book-list/BookList';
-import DefaultHeadingSection from './book-list/DefaultHeadingSection';
+import Form from './components/book-form/BookForm';
+import BookList from './components/book-list/BookList';
+import DefaultHeadingSection from './components/book-list/DefaultHeadingSection';
 import ToggleNavButton from './navigation/ToggleNavButton';
 import Navigation from './navigation/Navigation';
 
@@ -62,14 +61,15 @@ const ContentWrapper = styled.div`
 `;
 
 const App = () => {
+	const bookList = useRecoilValue(bookListState);
 	const {isOpen: isNavOpen} = useRecoilValue(navigationState);
-	const bookListIsEmpty = useSelector(selectBookListIsEmpty);
+	const isBookListEmpty = !bookList.length;
 
 	return (
 		<NotificationProvider>
 			<ContentWrapper>
 				<Form/>
-				{bookListIsEmpty 
+				{isBookListEmpty 
 					? <DefaultHeadingSection/>
 					: <BookList/> 
 				}

@@ -1,7 +1,7 @@
-import {useSelector} from 'react-redux';
+import {useRecoilValue} from 'recoil';
 import styled from 'styled-components';
 
-import {selectBookListIsEmpty} from '../book-list/bookListSlice';
+import {bookListState} from '../../state/bookList';
 
 import Toolbar from '../shared/Toolbar';
 import BookCountSelect from '../shared/BookCountSelect';
@@ -22,7 +22,8 @@ const ContentWrapper = styled.div`
 `;
 
 const Navigation = () => {
-	const isBookListEmpty = useSelector(selectBookListIsEmpty);
+	const bookList = useRecoilValue(bookListState);
+	const isBookListEmpty = !bookList.length;
 
 	return (
 		<ContentWrapper>

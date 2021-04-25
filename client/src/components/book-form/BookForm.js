@@ -1,9 +1,9 @@
-import {useRecoilState} from 'recoil';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import {isEqual, upperFirst} from 'lodash-es';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {bookListState} from '../../state/bookList';
+import {selectBooks, addBook} from '../book-list/bookListSlice';
 import {bookProps, normalizeBookData} from '../../utils/validation'
 import {useNotifications} from '../notifications/hooks/useNotifications';
 
@@ -44,7 +44,7 @@ const Button = styled.button`
 `;
 
 const BookForm = () => {
-	const [bookList, setBookList] = useRecoilState(bookListState);
+	const bookList = useSelector(selectBooks);
 	const {notify} = useNotifications();
 	const {register, handleSubmit, formState, reset, errors} = useForm({
 		mode: 'onChange',
@@ -69,20 +69,22 @@ const BookForm = () => {
 		/>
 	));
 
+	const dispatch = useDispatch();
+
 	const handleSubmitCallback = data => {
 		const newBook = normalizeBookData(data);
 		
-		const isBookPresent = Boolean(bookList.find(currBook => {
+		const bookIsPresent = Boolean(bookList.find(currBook => {
 			return isEqual(newBook, currBook);
 		}));
 
-		if (isBookPresent) {
+		if (bookIsPresent) {
 			notify.error('Book is already in the list');
 
 			return;
 		}
 
-		setBookList(state => [...state, newBook]);
+		dispatch(addBook(newBook));
 		notify.info('Book added');
 		reset();
 	}

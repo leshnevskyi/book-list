@@ -56,6 +56,12 @@ const Select = ({label, options, defaultOption, onChange}) => {
 		onChange(selectedOption.data);
 	}, [selectedOption, onChange]);
 
+	useEffect(() => {
+		setSelectedOption(optionList.find(option => {
+			return option.data.label === defaultOption.label
+		}) ?? optionList.head);
+	}, [defaultOption, optionList]);
+
 	function selectPrevOption() {
 		setSelectedOption(prevOption => prevOption.prev);
 	}

@@ -1,10 +1,10 @@
-import {useRecoilValue} from 'recoil';
 import styled from 'styled-components';
 import {upperFirst} from 'lodash-es';
+import {useSelector} from 'react-redux';
 
-import {sortedBookListState} from '../../state/bookList';
-import {bookCountState} from '../../state/bookList';
+import {selectSortedBooks} from './bookListSlice';
 import {bookProps} from '../../utils/validation';
+import {selectMaxCount} from './bookFilteringSlice';
 
 const Table = styled.table`
 	--row-height: 4.3em; 
@@ -62,7 +62,10 @@ const TableHeaderCell = styled(TableCell).attrs({as: 'th'})`
 `;
 
 const BookDataRow = ({book}) => {
-	const renderedBookDataCells = Object.values(book).map(value => {
+	const bookData = {...book};
+	delete bookData.id;
+
+	const renderedBookDataCells = Object.values(bookData).map(value => {
 		return <TableCell key={value}>{value}</TableCell>;
 	});
 
@@ -70,8 +73,8 @@ const BookDataRow = ({book}) => {
 }
 
 const BookTable = () => {
-	const bookList = useRecoilValue(sortedBookListState);
-	const bookCount = useRecoilValue(bookCountState);
+	const bookList = useSelector(selectSortedBooks);
+	const bookCount = useSelector(selectMaxCount);
 	const bookListSlice = bookList.slice(0, bookCount);
 
 	const renderedHeaders = Object.values(bookProps).map(value => {
@@ -84,7 +87,7 @@ const BookTable = () => {
 
 	const renderedBookDataRows = bookListSlice.map(book => (
 		<BookDataRow
-			key={`${book.title} ${book.author}`}
+			key={book.id}
 			book={book}
 		/>
 	));

@@ -1,8 +1,11 @@
 import {useCallback} from 'react';
-import {useSetRecoilState} from 'recoil';
+import {useDispatch, useSelector} from 'react-redux';
 
-import {bookSortingState} from '../../state/bookList';
-import {bookProps} from '../../utils/validation';
+import {
+	changeSortingProperty, 
+	selectSortingProperty,
+} from '../book-list/bookSortingSlice';
+import {bookProps} from 'utils/validation';
 
 import Select from './Select';
 
@@ -12,21 +15,21 @@ const options = Object.values(bookProps).map(prop => ({
 }));
 
 const BookSortingSelect = () => {
-	const label = 'sort by';
-	const defaultOption = options.find(option => option.name === 'title');
-	const setSortingState = useSetRecoilState(bookSortingState);
+	const sortingProperty = useSelector(selectSortingProperty);
+	const defaultOption = options.find(option => option.name === sortingProperty);
+	const dispatch = useDispatch();
 
 	function changeSorting(selectedOption) {
-		setSortingState(state => ({...state, by: selectedOption.name}));
+		dispatch(changeSortingProperty(selectedOption.name));
 	}
 
-	const handleChange = useCallback(changeSorting, [setSortingState]);
+	const handleChange = useCallback(changeSorting, [dispatch]);
 
 	return (
 		<Select
 			defaultOption={defaultOption}
 			options={options}
-			label={label}
+			label='sort by'
 			onChange={handleChange}
 		/>
 	);

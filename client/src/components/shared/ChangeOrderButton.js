@@ -1,7 +1,7 @@
-import {useSetRecoilState} from 'recoil';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
-import {bookSortingState} from '../../state/bookList';
+import {changeSortingOrder} from '../book-list/bookSortingSlice';
 
 import {
 	ReactComponent as ChangeOrderIcon
@@ -19,17 +19,10 @@ const Button = styled.button`
 `;
 
 const ChangeOrderButton = () => {
-	const setSorting = useSetRecoilState(bookSortingState);
+	const dispatch = useDispatch();
 
 	function handleClick() {
-		setSorting(prevState => ({
-			...prevState,
-			order: prevState.order === 'asc' 
-				? 'desc' 
-				: prevState.order === 'desc'
-				? 'asc'
-				: null,
-		}));
+		dispatch(changeSortingOrder());
 	}
 
 	return (

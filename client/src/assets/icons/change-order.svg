@@ -1,0 +1,23 @@
+<svg 
+	height='50'
+	width='50' 
+	viewBox='0 0 50 50' 
+	xmlns='http://www.w3.org/2000/svg'
+>
+	<path 
+		d='M12 4V34' 
+		vector-effect='non-scaling-stroke'
+	/>
+	<path 
+		d='M21 13L12 4L3 13' 
+		vector-effect='non-scaling-stroke'
+	/>
+	<path 
+		d='M38 47L38 17' 
+		vector-effect='non-scaling-stroke'
+	/>
+	<path 
+		d='M29 38L38 47L47 38' 
+		vector-effect='non-scaling-stroke'
+	/>
+</svg>

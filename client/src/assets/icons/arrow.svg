@@ -1,0 +1,11 @@
+<svg 
+	height='50' 
+	width='50' 
+	viewBox='0 0 50 50' 
+	xmlns='http://www.w3.org/2000/svg'
+>
+	<path 
+		d='M40 30L25 15L10 30'
+		vector-effect='non-scaling-stroke'
+	/>
+</svg>

@@ -21,10 +21,6 @@ const BookCountSelect = () => {
 		};
 	}), {value: Infinity, label: 'all'}];
 
-	const defaultOption = options.find(option => {
-		return option.value === Infinity;
-	});
-
 	const dispatch = useDispatch();
 	
 	function changeBookCount(selectedOption) {
@@ -33,7 +29,7 @@ const BookCountSelect = () => {
 
 	return (
 		<Select
-			defaultOption={defaultOption}
+			defaultValue={Infinity}
 			options={options}
 			label='books per page'
 			onChange={changeBookCount}

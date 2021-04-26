@@ -38,7 +38,7 @@ const Option = styled.span`
 	font-weight: 700;
 `;
 
-const Select = ({label, options, defaultOption, onChange}) => {
+const Select = ({label, options, value, defaultValue, onChange}) => {
 	const maxLabelLength = Math.max(...options.map(({label}) => {
 		return label.length;
 	})); 
@@ -47,21 +47,23 @@ const Select = ({label, options, defaultOption, onChange}) => {
 		return new DoublyLinkedList(...options)
 	}, [options]);
 
-	const [selectedOption, setSelectedOption] = useState(
-		optionList.find(option => option.data.label === defaultOption.label) 
-		?? optionList.head
-	);
-
-	useEffect(() => {
-		onChange(selectedOption.data);
-	}, [selectedOption, onChange]);
+	const [selectedOption, setSelectedOption] = useState(null);
+	const selectedValue = value ?? defaultValue ?? options[0].value;
 
 	useEffect(() => {
 		setSelectedOption(optionList.find(option => {
-			return option.data.label === defaultOption.label
-		}) ?? optionList.head);
-	}, [defaultOption, optionList]);
+			return option.data.value === selectedValue;
+		}));
+	}, [selectedValue, setSelectedOption, optionList]);
 
+	useEffect(() => {
+		if (!selectedOption) return;
+
+		onChange(selectedOption.data);
+	}, [selectedOption, onChange]);
+
+	if (!selectedOption) return null;
+	
 	function selectPrevOption() {
 		setSelectedOption(prevOption => prevOption.prev);
 	}

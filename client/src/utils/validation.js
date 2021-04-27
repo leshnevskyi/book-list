@@ -2,16 +2,22 @@ const bookProps = {
 	title: {
 		type: 'string',
 		name: 'title',
+		errorMessage: 'Title must not be empty.',
 	},
 	author: {
 		type: 'string',
-		name: 'author'
+		name: 'author',
+		pattern: /^[\p{Alpha}\s.'-,]*$/u,
+		errorMessage: 'Author name can only contain letters and some symbols used in names.',
 	},
 	year: {
 		type: 'number',
 		name: 'year',
 		pattern: /^[1-9]\d*$/,
 		max: new Date().getFullYear(),
+		errorMessage: `Year must be an integer value between 1 and ${
+			new Date().getFullYear()
+		}.`,
 	},
 	pageCount: {
 		type: 'number',
@@ -19,11 +25,13 @@ const bookProps = {
 		shortLabel: 'pages',
 		label: 'number of pages',
 		pattern: /^[1-9]\d*$/,
+		errorMessage: 'Number of pages must be a positive integer value.',
 	},
 	price: {
 		type: 'number',
 		name: 'price',
 		pattern: /^\d+(\.\d{2})?$/,
+		errorMessage: 'Price must be a decimal number separated by a dot.',
 	},
 };
 

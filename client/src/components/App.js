@@ -5,7 +5,7 @@ import {useRecoilValue} from 'recoil';
 import {selectBookListIsEmpty} from './book-list/bookListSlice';
 import {navigationState} from '../state/navigation';
 
-import NotificationProvider from './notifications/NotificationProvider';
+import {NotificationProvider} from './notifications';
 import Form from './book-form/BookForm';
 import BookList from './book-list/BookList';
 import DefaultHeadingSection from './book-list/DefaultHeadingSection';

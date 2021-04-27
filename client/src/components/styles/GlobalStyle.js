@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
 
 		font-size: 10px;
 		line-height: 1.3;
-		overflow: hidden;
 	}
 
 	::selection {

@@ -1,4 +1,5 @@
 import {createSlice, nanoid} from '@reduxjs/toolkit';
+import undoable from 'redux-undo';
 
 import initialBookList from 'data/books.json';
 import {getValidBooks, normalizeBookData} from 'utils/validation';
@@ -36,14 +37,16 @@ const bookListSlice = createSlice({
 	},
 });
 
-const selectBooks = state => state.bookList;
+const bookListReducer = undoable(bookListSlice.reducer);
+
+const selectBooks = state => state.bookList.present;
 
 const selectSortedBooks = state => {
-	return sortObjects(state.bookList, state.bookSorting);
+	return sortObjects(state.bookList.present, state.bookSorting);
 }
 
-const selectBookListIsEmpty = state => !state.bookList.length;
-const selectBookCount = state => state.bookList.length;
+const selectBookListIsEmpty = state => !state.bookList.present.length;
+const selectBookCount = state => state.bookList.present.length;
 
 export {
 	selectBooks,
@@ -57,4 +60,4 @@ export const {
 	removeBook,
 } = bookListSlice.actions;
 
-export default bookListSlice.reducer;
+export default bookListReducer;

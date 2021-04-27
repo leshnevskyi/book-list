@@ -1,18 +1,19 @@
-import {useRecoilState} from 'recoil';
+import {useContext} from 'react';
 import {v4 as uuidv4} from 'uuid';
 
-import {notificationState} from '../state/notifications';
+import NotificationContext from '../notificationContext';
 
 function useNotifications() {
-	const [notifications, setNotifications] = useRecoilState(notificationState);
+	const [notifications, setNotifications] = useContext(NotificationContext);
 
-	function addNotification(type, message) {
+	function addNotification(type, message, options) {
 		setNotifications(notifications => {
 			const id = uuidv4();
 			const newNotification = {
 				id,
 				type,
 				message,
+				options,
 			};
 
 			return {
@@ -23,19 +24,18 @@ function useNotifications() {
 	}
 
 	const notify = {
-		info(message) {
-			addNotification('info', message);
+		info(message, options) {
+			addNotification('info', message, options);
 		},
 
-		error(message) {
-			addNotification('error', message);
+		error(message, options) {
+			addNotification('error', message, options);
 		}
 	};
 
 	function removeNotification(notificationId) {
 		setNotifications(notifications => {
 			const newNotifications = {...notifications};
-
 			delete newNotifications[notificationId];
 			
 			return newNotifications;

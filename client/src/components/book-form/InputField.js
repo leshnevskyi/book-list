@@ -1,11 +1,13 @@
 import {forwardRef} from 'react';
 import styled from 'styled-components';
 
+import {bookProps} from 'utils/validation';
+
 const Input = styled.input`
 	--color: rgb(var(--white));
 	--border-color: ${props => props.isValid
 		? 'rgb(var(--cold-grey-500))'
-		: 'rgb(var(--bright-red-500))'
+		: 'rgb(var(--bright-red-500)) !important'
 	};
 
 	position: relative;
@@ -16,6 +18,10 @@ const Input = styled.input`
 	color: var(--color);
 	font-weight: 700;
 	border-bottom: var(--default-stroke-width) solid var(--border-color);
+
+	&:focus {
+		--border-color: rgb(var(--white));
+	}
 `;
 
 const Label = styled.label`
@@ -24,7 +30,15 @@ const Label = styled.label`
 	gap: 0.3em;
 `;
 
-const InputField = forwardRef(({label, name, ...restProps}, ref) => {
+const ErrorMessage = styled.span`
+	display: flex;
+	margin-top: 0.5rem;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: rgb(var(--white));
+`;
+
+const InputField = forwardRef(({label, name, isValid, ...restProps}, ref) => {
 	return (
 		<Label>
 			{label}
@@ -34,8 +48,12 @@ const InputField = forwardRef(({label, name, ...restProps}, ref) => {
 				type='text'
 				autoComplete='off'
 				spellcheck={false}
+				isValid={isValid}
 				{...restProps}
 			/>
+			{!isValid && (
+				<ErrorMessage>{bookProps[name].errorMessage}</ErrorMessage>
+			)}
 		</Label>
 	)
 });

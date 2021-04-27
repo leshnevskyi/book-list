@@ -2,9 +2,9 @@ import {useState, useEffect, useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 
-import {selectSortedBooks, removeBook} from './bookListSlice';
+import {selectSortedBooks, addBook, removeBook} from './bookListSlice';
 import DoublyLinkedList from '../../utils/doublyLinkedList';
-import {useNotifications} from '../notifications/hooks/useNotifications';
+import {useNotifications} from '../notifications';
 
 import Toolbar from '../shared/Toolbar';
 import Arrow from '../shared/Arrow';
@@ -12,7 +12,7 @@ import RemoveBookButton from './RemoveBookButton';
 import BookSortingSelect from '../shared/BookSortingSelect';
 
 const Section = styled.section`
-	min-height: 100vh;
+
 `;
 
 const ArrowButton = styled(Arrow).attrs({el: 'button'})`
@@ -119,8 +119,11 @@ const BookList = () => {
 				/>
 				<RemoveBookButton
 					onClick={() => {
+						const currBookData = currBook.data;
+						const restoreBook = () => dispatch(addBook(currBookData));
+
 						dispatch(removeBook(currBook.data.id));
-						notify.info('Book removed');
+						notify.info('Book removed', {onUndo: restoreBook});
 					}}
 				/>
 				<BookSortingSelect/>

@@ -6,7 +6,7 @@ import {
 import Snackbar from '../Snackbar';
 
 const NotificationList = () => {
-	const {notifications, removeNotification} = useNotifications();
+	const {notifications, notify, removeNotification} = useNotifications();
 
 	const renderedNotifications = Object.values(notifications)
 		.map(({id, type, message, options}) => {
@@ -21,6 +21,7 @@ const NotificationList = () => {
 				handleUndo = () => {
 					options.onUndo();
 					removeNotification(id);
+					notify.info('Book restored');
 				}
 			}
 

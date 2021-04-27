@@ -8,7 +8,7 @@ const Button = styled.button`
 	height: var(--button-size);
 	width: var(--button-size);
 
-	&:hover {
+	&:hover, &:focus {
 		--icon-color: rgb(var(--bright-red-500));
 	}
 

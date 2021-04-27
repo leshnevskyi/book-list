@@ -10,7 +10,8 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 
-	&:not(:disabled):hover {
+	&:not(:disabled):hover,
+	&:not(:disabled):focus {
 		--icon-color: rgb(var(--white));
 	}
 
